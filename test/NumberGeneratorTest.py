@@ -1,5 +1,5 @@
 '''
-Unit tests for RandomNumber.py (problem 2)
+Unit tests for NumberGenerator.py (problem 4)
 '''
 import unittest
 from src.NumberGenerator import NumberGenerator
