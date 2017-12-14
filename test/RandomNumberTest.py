@@ -41,7 +41,7 @@ class RandomNumberTest(unittest.TestCase):
         ran_num = RandomNumber(filename="test.log")
         new_num = ran_num.ret_rand_num()
         with open("test.log", 'r') as f:
-            line = f.read()
+            line = f.readline()
             self.assertEqual(new_num, int(line.split(',')[0]))
         f.close()
 
