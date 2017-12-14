@@ -2,6 +2,7 @@
 Unit tests for RandomNumber.py (problem 2)
 '''
 import unittest
+import os
 from src.RandomNumber import RandomNumber
 
 class RandomNumberTest(unittest.TestCase):
@@ -32,6 +33,17 @@ class RandomNumberTest(unittest.TestCase):
             ran_num.ret_rand_num()
         new_num = ran_num.ret_rand_num()
         self.assertEqual(new_num, ran_num.history[-1])
+
+    def test_write(self):
+        """
+        Checks if file gets written
+        """
+        ran_num = RandomNumber(filename="test.log")
+        new_num = ran_num.ret_rand_num()
+        with open("test.log", 'r') as f:
+            line = f.read()
+            self.assertEqual(new_num, int(line.split(',')[0]))
+        f.close()
 
 
 

@@ -1,4 +1,5 @@
 import random
+import datetime
 '''
 Generates a random number from 1-5 based on the probabilities below.
 '''
@@ -8,7 +9,7 @@ class RandomNumber:
     Class which generates number from 1-5 as stated above and stores 100
     """
 
-    def __init__(self, store_count = 100):
+    def __init__(self, store_count = 100, filename="numbers.log"):
         """
         store_count: keeps history of numbers up to store_count
         """
@@ -21,6 +22,7 @@ class RandomNumber:
             4: 0,
             5: 0
         }
+        self.filename = filename
 
     def store_num(self, num):
         """
@@ -51,6 +53,7 @@ class RandomNumber:
         rand_num = random.random()
         gen_num = self._get_num_from_percentage(rand_num)
         self.store_num(gen_num)
+        self.write_to_file(gen_num)
         return gen_num
 
     def _get_num_from_percentage(self, percent):
@@ -75,3 +78,11 @@ class RandomNumber:
             return 5
         else:
             raise Exception('not a valid number')
+
+    def write_to_file(self, num):
+        """
+        Writes number and time to file
+        """
+        with open(self.filename, 'a') as f:
+            f.write('{},{}\n'.format(num,datetime.datetime.now()))
+        f.close()
